@@ -1,20 +1,24 @@
+const fs = require('fs');
 const express = require('express');
+const marked = require('marked');
 const _ = require('./date');
-const app = express();
 
-app.get('/:timestamp', function(req, res) {
+const app = express();
+const router = express.Router();
+const readme = fs.readFileSync('./README.md').toString();
+const index = marked(readme);
+
+router.get('/:timestamp', (req, res) => {
   const timestring = req.params.timestamp;
   var timestamp;
 
   if (isNaN(+timestring)) {
-    console.log('natural');
     try {
       timestamp = Date.natural(timestring);
     } catch(e) {
       timestamp = null;
     }
   } else {
-    console.log('unix num');
     timestamp = Date.unix(timestring);
   }
 
@@ -23,6 +27,9 @@ app.get('/:timestamp', function(req, res) {
     natural: timestamp ? timestamp.getNaturalDate() : null
   });
 });
+
+app.use('/', (_, res) => res.send(index));
+app.use('/*', router);
 
 const port = process.env.port || 3750;
 app.listen(port);

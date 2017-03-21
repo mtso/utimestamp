@@ -4,6 +4,7 @@
   "description": "Timestamp Microservice",
   "main": "service.js",
   "scripts": {
+    "start": "node service.js",
     "test": "mocha"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "devDependencies": {
     "mocha": "^3.2.0",
     "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
   }
 }

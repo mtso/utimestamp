@@ -24,4 +24,8 @@ app.get('/:timestamp', function(req, res) {
   });
 });
 
+const port = process.env.port || 3750;
+app.listen(port);
+console.log('Listening on ' + port + '...');
+
 exports = module.exports = app;

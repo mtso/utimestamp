@@ -28,8 +28,8 @@ router.get('/:timestamp', (req, res) => {
   });
 });
 
+app.use('/', router);
 app.use('/', (_, res) => res.send(index));
-app.use('/*', router);
 
 const port = process.env.port || 3750;
 app.listen(port);

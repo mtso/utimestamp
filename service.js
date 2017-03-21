@@ -31,7 +31,7 @@ router.get('/:timestamp', (req, res) => {
 app.use('/', router);
 app.use('/', (_, res) => res.send(index));
 
-const port = process.env.port || 3750;
+const port = process.env.PORT || 3750;
 app.listen(port);
 console.log('Listening on ' + port + '...');
 

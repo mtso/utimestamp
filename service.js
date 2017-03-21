@@ -22,11 +22,16 @@ Date.prototype.getUnixTime = function() {
 }
 
 Date.prototype.getNaturalDate = function() {
-  return MONTHS[this.getMonth()] + ' ' + this.getUTCDate() + ', ' + this.getUTCFullYear();
+  return MONTHS[this.getUTCMonth()] + ' ' + this.getUTCDate() + ', ' + this.getUTCFullYear();
 }
 
 Date.unix = function(unixTimestamp) {
-  return new Date(+unixTimestamp * 1000);
+  const unixtime = new Date(+unixTimestamp * 1000);
+  if (isNaN(unixtime.getTime())) {
+    return null;
+  } else {
+    return unixtime;
+  }
 }
 
 Date.natural = function(timestring) {
@@ -41,7 +46,6 @@ Date.natural = function(timestring) {
 
   return new Date(year, month, date-1, 16);
 }
-
 
 app.get('/:timestamp', function(req, res) {
   const timestring = req.params.timestamp;

@@ -60,5 +60,5 @@ describe('GET /', function() {
         unix: null,
         natural: null
       }, done);
-  })
+  });
 });
